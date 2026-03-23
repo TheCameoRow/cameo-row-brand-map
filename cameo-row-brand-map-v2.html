@@ -1,0 +1,1010 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Cameo Row — Brand Identity Map v2</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,200;0,9..40,300;1,9..40,200;1,9..40,300&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    /* From the gradients */
+    --fire-red:     #E8291A;
+    --amber:        #F07A1A;
+    --sun-yellow:   #F2C94C;
+    --sky-blue:     #5BC8F5;
+    --cobalt:       #1A5FD4;
+    --cyan:         #00D4D4;
+    --burnt-orange: #C1440E;
+
+    /* Added heritage palette */
+    --midnight:     #100A2E;
+    --indigo-deep:  #1A1040;
+    --bone:         #F2EBD9;
+    --sienna:       #8C3A1A;
+    --cowrie-shell: #E8C9A0;
+    --wet-sand:     #8C7355;
+    --kente-gold:   #C8941A;
+    --forest-green: #1A4A2A;
+
+    /* UI */
+    --bg:           #0C0818;
+    --bg-card:      rgba(255,255,255,0.04);
+    --border:       rgba(255,255,255,0.08);
+    --text:         #F2EBD9;
+    --text-muted:   rgba(242,235,217,0.5);
+    --accent:       #C8941A;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* ── GRAIN ── */
+  body::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.06'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 1000;
+    opacity: 0.6;
+  }
+
+  /* ── HERO ── */
+  .hero {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 80px 40px;
+    overflow: hidden;
+  }
+
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+  }
+
+  /* Gradient orbs — day palette */
+  .orb {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(80px);
+    opacity: 0.55;
+  }
+  .orb-1 { width: 60vw; height: 60vw; background: var(--fire-red);    top: -20%; left: -15%; animation: drift1 14s ease-in-out infinite alternate; }
+  .orb-2 { width: 50vw; height: 50vw; background: var(--amber);       top: 10%;  left: 20%;  animation: drift2 18s ease-in-out infinite alternate; }
+  .orb-3 { width: 45vw; height: 45vw; background: var(--sky-blue);    bottom: -10%; right: -10%; animation: drift3 16s ease-in-out infinite alternate; }
+  .orb-4 { width: 35vw; height: 35vw; background: var(--cobalt);      top: 30%;  right: 5%;  animation: drift1 20s ease-in-out infinite alternate-reverse; }
+  .orb-5 { width: 30vw; height: 30vw; background: var(--kente-gold);  bottom: 20%; left: 30%; animation: drift2 12s ease-in-out infinite alternate; opacity: 0.3; }
+
+  @keyframes drift1 { from { transform: translate(0,0) scale(1); } to { transform: translate(5%,8%) scale(1.1); } }
+  @keyframes drift2 { from { transform: translate(0,0) scale(1); } to { transform: translate(-6%,5%) scale(0.95); } }
+  @keyframes drift3 { from { transform: translate(0,0) scale(1); } to { transform: translate(4%,-6%) scale(1.08); } }
+
+  .hero-content {
+    position: relative;
+    z-index: 2;
+  }
+
+  .hero-eyebrow {
+    font-weight: 200;
+    font-size: 10px;
+    letter-spacing: 0.5em;
+    text-transform: uppercase;
+    color: var(--cowrie-shell);
+    margin-bottom: 24px;
+    opacity: 0;
+    animation: fadeUp 0.8s ease forwards 0.3s;
+  }
+
+  .hero-title {
+    font-weight: 200;
+    font-size: clamp(52px, 9vw, 120px);
+    letter-spacing: 0.1em;
+    line-height: 0.95;
+    color: var(--bone);
+    margin-bottom: 10px;
+    opacity: 0;
+    animation: fadeUp 1s ease forwards 0.5s;
+    text-shadow: 0 2px 40px rgba(0,0,0,0.4);
+  }
+
+  .hero-title span {
+    display: block;
+    font-size: clamp(16px, 2.5vw, 28px);
+    letter-spacing: 0.35em;
+    font-weight: 200;
+    color: var(--kente-gold);
+    margin-top: 14px;
+  }
+
+  .hero-sub {
+    font-weight: 200;
+    font-size: 12px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-top: 20px;
+    opacity: 0;
+    animation: fadeUp 0.8s ease forwards 0.8s;
+  }
+
+  /* Cameo SVG mark */
+  .hero-mark {
+    margin: 36px auto 0;
+    opacity: 0;
+    animation: fadeUp 1s ease forwards 1s;
+  }
+
+  /* ── MAIN CONTENT ── */
+  .content {
+    max-width: 1040px;
+    margin: 0 auto;
+    padding: 80px 40px 120px;
+    position: relative;
+    z-index: 2;
+  }
+
+  /* ── SECTION HEADER ── */
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 36px;
+    opacity: 0;
+    animation: fadeUp 0.7s ease forwards;
+  }
+
+  .section-header-label {
+    font-weight: 200;
+    font-size: 9px;
+    letter-spacing: 0.45em;
+    text-transform: uppercase;
+    color: var(--accent);
+    white-space: nowrap;
+  }
+
+  .section-header-line {
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(to right, rgba(200,148,26,0.4), transparent);
+  }
+
+  section { margin-bottom: 80px; }
+
+  /* ── COLOR PALETTE ── */
+  .palette-section {
+    margin-bottom: 80px;
+  }
+
+  .palette-intro {
+    font-weight: 200;
+    font-size: 14px;
+    line-height: 1.8;
+    color: var(--text-muted);
+    max-width: 640px;
+    margin-bottom: 40px;
+    letter-spacing: 0.02em;
+    opacity: 0;
+    animation: fadeUp 0.7s ease forwards 0.15s;
+  }
+
+  .palette-group {
+    margin-bottom: 36px;
+  }
+
+  .palette-group-label {
+    font-weight: 200;
+    font-size: 9px;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 14px;
+    opacity: 0;
+    animation: fadeUp 0.6s ease forwards 0.2s;
+  }
+
+  .swatches {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  .swatch {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    opacity: 0;
+    animation: fadeUp 0.6s ease forwards;
+  }
+
+  .swatch-color {
+    width: 72px;
+    height: 72px;
+    border-radius: 2px;
+    border: 1px solid rgba(255,255,255,0.08);
+    position: relative;
+    transition: transform 0.3s ease;
+  }
+
+  .swatch:hover .swatch-color { transform: scale(1.06); }
+
+  .swatch-name {
+    font-weight: 200;
+    font-size: 9px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    text-align: center;
+    width: 72px;
+  }
+
+  .swatch-hex {
+    font-weight: 200;
+    font-size: 9px;
+    color: rgba(242,235,217,0.25);
+    text-align: center;
+    font-family: monospace;
+    letter-spacing: 0.05em;
+  }
+
+  /* gradient swatch */
+  .swatch-color.grad-day {
+    background: linear-gradient(135deg, #E8291A, #F07A1A, #F2C94C, #5BC8F5);
+  }
+  .swatch-color.grad-night {
+    background: linear-gradient(135deg, #00D4D4, #1A5FD4, #100A2E, #C1440E);
+  }
+
+  /* ── WORD CLUSTERS ── */
+  .cluster-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    margin-bottom: 80px;
+  }
+
+  .cluster {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    padding: 28px;
+    opacity: 0;
+    animation: fadeUp 0.7s ease forwards;
+    transition: border-color 0.3s ease;
+  }
+
+  .cluster:hover { border-color: rgba(200,148,26,0.3); }
+
+  .cluster-title {
+    font-weight: 300;
+    font-size: 9px;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 16px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .word-list {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px 0;
+  }
+
+  .word-list li {
+    font-weight: 200;
+    font-size: 13px;
+    letter-spacing: 0.04em;
+    color: var(--text-muted);
+    line-height: 1.9;
+    width: 50%;
+    padding-left: 12px;
+    position: relative;
+  }
+
+  .word-list li::before {
+    content: '·';
+    position: absolute;
+    left: 0;
+    color: var(--accent);
+    opacity: 0.5;
+  }
+
+  /* ── ADINKRA ── */
+  .adinkra-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+    margin-bottom: 80px;
+  }
+
+  .adinkra-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    padding: 28px 20px 24px;
+    text-align: center;
+    opacity: 0;
+    animation: fadeUp 0.7s ease forwards;
+    transition: border-color 0.3s ease, transform 0.3s ease;
+    cursor: default;
+  }
+
+  .adinkra-card:hover {
+    border-color: rgba(200,148,26,0.5);
+    transform: translateY(-3px);
+  }
+
+  .adinkra-svg {
+    width: 64px;
+    height: 64px;
+    margin: 0 auto 16px;
+    display: block;
+  }
+
+  .adinkra-name {
+    font-weight: 300;
+    font-size: 11px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 8px;
+  }
+
+  .adinkra-meaning {
+    font-weight: 200;
+    font-size: 11px;
+    line-height: 1.7;
+    color: var(--text-muted);
+    font-style: italic;
+    margin-bottom: 10px;
+  }
+
+  .adinkra-brand {
+    font-weight: 200;
+    font-size: 11px;
+    line-height: 1.6;
+    color: rgba(242,235,217,0.35);
+    letter-spacing: 0.02em;
+  }
+
+  /* ── ICONOGRAPHY ── */
+  .icon-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    margin-bottom: 80px;
+  }
+
+  .icon-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    padding: 26px 22px;
+    opacity: 0;
+    animation: fadeUp 0.7s ease forwards;
+    transition: border-color 0.3s ease;
+  }
+
+  .icon-card:hover { border-color: rgba(200,148,26,0.4); }
+
+  .icon-theme {
+    font-weight: 300;
+    font-size: 9px;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 10px;
+  }
+
+  .icon-symbols {
+    font-weight: 200;
+    font-size: 13px;
+    color: var(--text-muted);
+    line-height: 2;
+    letter-spacing: 0.02em;
+  }
+
+  /* ── HERITAGE ── */
+  .heritage-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    margin-bottom: 80px;
+  }
+
+  .heritage-card {
+    border-left: 2px solid var(--border);
+    padding: 24px 20px 24px 24px;
+    opacity: 0;
+    animation: fadeUp 0.7s ease forwards;
+    transition: border-color 0.3s ease;
+  }
+
+  .heritage-card:hover { border-color: var(--accent); }
+
+  .heritage-flag {
+    font-size: 22px;
+    margin-bottom: 10px;
+    display: block;
+  }
+
+  .heritage-title {
+    font-weight: 300;
+    font-size: 10px;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 12px;
+  }
+
+  .heritage-body {
+    font-weight: 200;
+    font-size: 13px;
+    line-height: 1.85;
+    color: var(--text-muted);
+  }
+
+  .heritage-tags {
+    margin-top: 12px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
+  .heritage-tag {
+    font-weight: 200;
+    font-size: 9px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--accent);
+    border: 1px solid rgba(200,148,26,0.3);
+    padding: 3px 8px;
+  }
+
+  /* ── THE THESIS ── */
+  .thesis {
+    border: 1px solid rgba(200,148,26,0.25);
+    padding: 48px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    margin-bottom: 80px;
+    opacity: 0;
+    animation: fadeUp 0.8s ease forwards;
+  }
+
+  .thesis::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at center, rgba(200,148,26,0.06) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .thesis-eyebrow {
+    font-weight: 200;
+    font-size: 9px;
+    letter-spacing: 0.5em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 24px;
+  }
+
+  .thesis-body {
+    font-weight: 200;
+    font-size: clamp(16px, 2.2vw, 22px);
+    line-height: 1.8;
+    color: var(--bone);
+    letter-spacing: 0.04em;
+    max-width: 680px;
+    margin: 0 auto;
+    font-style: italic;
+  }
+
+  .thesis-body strong {
+    font-weight: 300;
+    color: var(--kente-gold);
+    font-style: normal;
+  }
+
+  /* ── TAGLINES ── */
+  .tagline-item {
+    border-top: 1px solid var(--border);
+    padding: 22px 0;
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    opacity: 0;
+    animation: fadeUp 0.6s ease forwards;
+    cursor: default;
+    transition: padding-left 0.3s ease;
+  }
+
+  .tagline-item:hover { padding-left: 10px; }
+  .tagline-item:hover .tagline-num { color: var(--accent); }
+
+  .tagline-num {
+    font-weight: 200;
+    font-size: 9px;
+    letter-spacing: 0.2em;
+    color: rgba(200,148,26,0.3);
+    width: 28px;
+    flex-shrink: 0;
+    transition: color 0.3s ease;
+  }
+
+  .tagline-text {
+    font-weight: 200;
+    font-size: clamp(15px, 2vw, 21px);
+    letter-spacing: 0.06em;
+    color: var(--bone);
+    font-style: italic;
+  }
+
+  /* ── LORE ── */
+  .lore-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+  }
+
+  .lore-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    padding: 30px;
+    opacity: 0;
+    animation: fadeUp 0.7s ease forwards;
+    transition: border-color 0.3s ease;
+  }
+
+  .lore-card:hover { border-color: rgba(200,148,26,0.3); }
+
+  .lore-title {
+    font-weight: 300;
+    font-size: 9px;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 14px;
+  }
+
+  .lore-body {
+    font-weight: 200;
+    font-size: 14px;
+    line-height: 1.9;
+    color: var(--text-muted);
+    letter-spacing: 0.02em;
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    text-align: center;
+    padding: 48px 40px;
+    border-top: 1px solid var(--border);
+    position: relative;
+    z-index: 2;
+  }
+
+  .footer-mark {
+    font-weight: 200;
+    font-size: 9px;
+    letter-spacing: 0.5em;
+    text-transform: uppercase;
+    color: rgba(200,148,26,0.3);
+  }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(18px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  /* Stagger helpers */
+  .d1 { animation-delay: 0.1s; }
+  .d2 { animation-delay: 0.2s; }
+  .d3 { animation-delay: 0.3s; }
+  .d4 { animation-delay: 0.4s; }
+  .d5 { animation-delay: 0.5s; }
+  .d6 { animation-delay: 0.6s; }
+  .d7 { animation-delay: 0.7s; }
+  .d8 { animation-delay: 0.8s; }
+
+  @media (max-width: 700px) {
+    .cluster-grid, .lore-grid, .heritage-grid { grid-template-columns: 1fr; }
+    .adinkra-grid { grid-template-columns: 1fr 1fr; }
+    .icon-grid { grid-template-columns: 1fr 1fr; }
+    .content { padding: 60px 24px 80px; }
+    .thesis { padding: 32px 24px; }
+    .swatches { gap: 10px; }
+    .swatch-color { width: 56px; height: 56px; }
+    .swatch-name, .swatch-hex { width: 56px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ── HERO ── -->
+<section class="hero">
+  <div class="hero-bg">
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+    <div class="orb orb-4"></div>
+    <div class="orb orb-5"></div>
+  </div>
+  <div class="hero-content">
+    <p class="hero-eyebrow">Brand Identity Map · Version II</p>
+    <h1 class="hero-title">
+      The Cameo Row
+      <span>Manchester, Jamaica · Ghana · Haiti</span>
+    </h1>
+    <p class="hero-sub">Retail · Lifestyle · Heritage · Lore</p>
+
+    <!-- Cameo / Cowrie mark -->
+    <svg class="hero-mark" width="72" height="90" viewBox="0 0 72 90" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <!-- Outer oval — cameo frame -->
+      <ellipse cx="36" cy="45" rx="34" ry="43" stroke="#C8941A" stroke-width="1.2"/>
+      <!-- Inner oval -->
+      <ellipse cx="36" cy="45" rx="27" ry="35" stroke="#C8941A" stroke-width="0.5" stroke-dasharray="3 4"/>
+      <!-- Cowrie ridge lines -->
+      <path d="M20 45 Q36 38 52 45" stroke="#C8941A" stroke-width="0.6" stroke-dasharray="2 3" opacity="0.5"/>
+      <path d="M18 50 Q36 43 54 50" stroke="#C8941A" stroke-width="0.4" stroke-dasharray="2 3" opacity="0.35"/>
+      <!-- Profile silhouette (Adinkra-geometric) -->
+      <path d="M38 25 C38 25 33 24 31 27 C29 30 29 34 30 37 C31 40 30 43 29 46 C28 49 27 52 28 54 C29 56 32 56 34 55 C36 54 38 51 39 49 C40 47 40 42 39 38 C38 34 39 29 38 25Z" fill="#C8941A" opacity="0.4"/>
+      <!-- Sankofa dot (the looking-back eye) -->
+      <circle cx="34" cy="30" r="2" fill="#C8941A" opacity="0.7"/>
+    </svg>
+  </div>
+</section>
+
+<div class="content">
+
+  <!-- ── COLOR PALETTE ── -->
+  <section class="palette-section">
+    <div class="section-header d1">
+      <span class="section-header-label">Colour Palette</span>
+      <div class="section-header-line"></div>
+    </div>
+
+    <p class="palette-intro">Your gradient images form the emotional core — day and night versions of the same world. The added colours root the palette in Akan heritage, Jamaican landscape, and the tactile luxury of carved shell.</p>
+
+    <div class="palette-group">
+      <div class="palette-group-label">From your gradients — Day</div>
+      <div class="swatches">
+        <div class="swatch d1"><div class="swatch-color" style="background:#E8291A"></div><div class="swatch-name">Fire Red</div><div class="swatch-hex">#E8291A</div></div>
+        <div class="swatch d2"><div class="swatch-color" style="background:#F07A1A"></div><div class="swatch-name">Amber</div><div class="swatch-hex">#F07A1A</div></div>
+        <div class="swatch d3"><div class="swatch-color" style="background:#F2C94C"></div><div class="swatch-name">Sun Yellow</div><div class="swatch-hex">#F2C94C</div></div>
+        <div class="swatch d4"><div class="swatch-color" style="background:#5BC8F5"></div><div class="swatch-name">Sky Blue</div><div class="swatch-hex">#5BC8F5</div></div>
+        <div class="swatch d5"><div class="swatch-color grad-day"></div><div class="swatch-name">Day Gradient</div><div class="swatch-hex">→</div></div>
+      </div>
+    </div>
+
+    <div class="palette-group">
+      <div class="palette-group-label">From your gradients — Night</div>
+      <div class="swatches">
+        <div class="swatch d1"><div class="swatch-color" style="background:#00D4D4"></div><div class="swatch-name">Cyan</div><div class="swatch-hex">#00D4D4</div></div>
+        <div class="swatch d2"><div class="swatch-color" style="background:#1A5FD4"></div><div class="swatch-name">Cobalt</div><div class="swatch-hex">#1A5FD4</div></div>
+        <div class="swatch d3"><div class="swatch-color" style="background:#100A2E"></div><div class="swatch-name">Midnight</div><div class="swatch-hex">#100A2E</div></div>
+        <div class="swatch d4"><div class="swatch-color" style="background:#C1440E"></div><div class="swatch-name">Burnt Orange</div><div class="swatch-hex">#C1440E</div></div>
+        <div class="swatch d5"><div class="swatch-color grad-night"></div><div class="swatch-name">Night Gradient</div><div class="swatch-hex">→</div></div>
+      </div>
+    </div>
+
+    <div class="palette-group">
+      <div class="palette-group-label">Added — Heritage & Luxury</div>
+      <div class="swatches">
+        <div class="swatch d1"><div class="swatch-color" style="background:#C8941A"></div><div class="swatch-name">Kente Gold</div><div class="swatch-hex">#C8941A</div></div>
+        <div class="swatch d2"><div class="swatch-color" style="background:#E8C9A0"></div><div class="swatch-name">Cowrie Shell</div><div class="swatch-hex">#E8C9A0</div></div>
+        <div class="swatch d3"><div class="swatch-color" style="background:#F2EBD9"></div><div class="swatch-name">Bone</div><div class="swatch-hex">#F2EBD9</div></div>
+        <div class="swatch d4"><div class="swatch-color" style="background:#8C7355"></div><div class="swatch-name">Wet Sand</div><div class="swatch-hex">#8C7355</div></div>
+        <div class="swatch d5"><div class="swatch-color" style="background:#8C3A1A"></div><div class="swatch-name">Sienna</div><div class="swatch-hex">#8C3A1A</div></div>
+        <div class="swatch d6"><div class="swatch-color" style="background:#1A4A2A"></div><div class="swatch-name">Forest</div><div class="swatch-hex">#1A4A2A</div></div>
+        <div class="swatch d7"><div class="swatch-color" style="background:#1A1040"></div><div class="swatch-name">Indigo Deep</div><div class="swatch-hex">#1A1040</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── HERITAGE ── -->
+  <section>
+    <div class="section-header d1">
+      <span class="section-header-label">Heritage Roots</span>
+      <div class="section-header-line"></div>
+    </div>
+    <div class="heritage-grid">
+
+      <div class="heritage-card d2">
+        <span class="heritage-flag">🇯🇲</span>
+        <div class="heritage-title">Manchester, Jamaica</div>
+        <div class="heritage-body">Generations rooted in the cool hills of Manchester Parish — once plantation country, now the fertile ground this brand grows from. The market row, the colonial townhouse door, the hummingbird that never stays still.</div>
+        <div class="heritage-tags">
+          <span class="heritage-tag">The Market Row</span>
+          <span class="heritage-tag">Hummingbird</span>
+          <span class="heritage-tag">Blue Mountain</span>
+          <span class="heritage-tag">Kingston Townhouse</span>
+        </div>
+      </div>
+
+      <div class="heritage-card d3">
+        <span class="heritage-flag">🇬🇭</span>
+        <div class="heritage-title">Akan · Ashanti · Ghana</div>
+        <div class="heritage-body">DNA and slave ship records point to the Gold Coast — present-day Ghana — as the dominant African origin for Jamaicans. The Akan and Ashanti brought language, ceremony, and Adinkra: a visual language of proverbs and power.</div>
+        <div class="heritage-tags">
+          <span class="heritage-tag">Adinkra Symbols</span>
+          <span class="heritage-tag">Kente Geometry</span>
+          <span class="heritage-tag">Gold Coast</span>
+          <span class="heritage-tag">Cowrie Currency</span>
+        </div>
+      </div>
+
+      <div class="heritage-card d4">
+        <span class="heritage-flag">🇭🇹</span>
+        <div class="heritage-title">Haiti</div>
+        <div class="heritage-body">Haitian heritage brings the vèvè — sacred geometric symbols used in Vodou ceremony — and a tradition of ornate ironwork gates and sequined flags. The Haitian bicolour blue and red already lives inside your gradient palette.</div>
+        <div class="heritage-tags">
+          <span class="heritage-tag">Vèvè Geometry</span>
+          <span class="heritage-tag">Ironwork Gate</span>
+          <span class="heritage-tag">Sequined Flag</span>
+          <span class="heritage-tag">Marassa Twins</span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ── ADINKRA ── -->
+  <section>
+    <div class="section-header d1">
+      <span class="section-header-label">Adinkra Symbols — Your Logo Language</span>
+      <div class="section-header-line"></div>
+    </div>
+    <div class="adinkra-grid">
+
+      <!-- SANKOFA -->
+      <div class="adinkra-card d2">
+        <svg class="adinkra-svg" viewBox="0 0 64 64" fill="none">
+          <!-- Sankofa: bird looking back, stylised -->
+          <circle cx="32" cy="32" r="28" stroke="#C8941A" stroke-width="1" opacity="0.2"/>
+          <!-- body arc -->
+          <path d="M16 40 Q20 22 32 20 Q44 18 48 32 Q50 42 40 46 Q32 50 24 44" stroke="#C8941A" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+          <!-- head looking back -->
+          <circle cx="20" cy="38" r="5" stroke="#C8941A" stroke-width="1.2" fill="none"/>
+          <!-- eye -->
+          <circle cx="18" cy="37" r="1.5" fill="#C8941A"/>
+          <!-- tail up -->
+          <path d="M44 46 Q50 40 52 30" stroke="#C8941A" stroke-width="1.2" stroke-linecap="round" fill="none"/>
+          <!-- egg between feet -->
+          <ellipse cx="32" cy="54" rx="5" ry="4" stroke="#C8941A" stroke-width="1" fill="none" opacity="0.6"/>
+        </svg>
+        <div class="adinkra-name">Sankofa</div>
+        <div class="adinkra-meaning">"Go back and get it"</div>
+        <div class="adinkra-brand">Return to roots to move forward. The founding symbol of this brand.</div>
+      </div>
+
+      <!-- ADINKRAHENE -->
+      <div class="adinkra-card d3">
+        <svg class="adinkra-svg" viewBox="0 0 64 64" fill="none">
+          <!-- Concentric circles — crown -->
+          <circle cx="32" cy="32" r="28" stroke="#C8941A" stroke-width="1.2"/>
+          <circle cx="32" cy="32" r="19" stroke="#C8941A" stroke-width="1"/>
+          <circle cx="32" cy="32" r="10" stroke="#C8941A" stroke-width="1.2"/>
+          <circle cx="32" cy="32" r="3"  fill="#C8941A"/>
+        </svg>
+        <div class="adinkra-name">Adinkrahene</div>
+        <div class="adinkra-meaning">"Chief of Adinkra"</div>
+        <div class="adinkra-brand">Greatness & leadership. The concentric oval echoes the cameo frame directly.</div>
+      </div>
+
+      <!-- NSOROMMA -->
+      <div class="adinkra-card d4">
+        <svg class="adinkra-svg" viewBox="0 0 64 64" fill="none">
+          <!-- Star / cross form -->
+          <circle cx="32" cy="32" r="28" stroke="#C8941A" stroke-width="1" opacity="0.2"/>
+          <!-- 8-pointed star -->
+          <path d="M32 8 L34.5 28 L54 26 L36 32 L52 44 L32 36 L28 56 L30 36 L10 44 L28 32 L12 20 L32 28 Z" stroke="#C8941A" stroke-width="1.2" fill="none" stroke-linejoin="round"/>
+          <circle cx="32" cy="32" r="3" fill="#C8941A" opacity="0.7"/>
+        </svg>
+        <div class="adinkra-name">Nsoromma</div>
+        <div class="adinkra-meaning">"Child of the heavens"</div>
+        <div class="adinkra-brand">Guardianship & divine guidance. A star that watches over the Row.</div>
+      </div>
+
+      <!-- DWENNIMMEN -->
+      <div class="adinkra-card d5">
+        <svg class="adinkra-svg" viewBox="0 0 64 64" fill="none">
+          <!-- Ram horns — stylised spirals -->
+          <circle cx="32" cy="32" r="28" stroke="#C8941A" stroke-width="1" opacity="0.2"/>
+          <!-- Left horn spiral -->
+          <path d="M32 32 Q20 28 16 20 Q12 10 22 10 Q30 10 28 20 Q26 26 32 28" stroke="#C8941A" stroke-width="1.4" fill="none" stroke-linecap="round"/>
+          <!-- Right horn spiral -->
+          <path d="M32 32 Q44 28 48 20 Q52 10 42 10 Q34 10 36 20 Q38 26 32 28" stroke="#C8941A" stroke-width="1.4" fill="none" stroke-linecap="round"/>
+          <!-- Bottom knot -->
+          <path d="M26 36 Q32 42 38 36" stroke="#C8941A" stroke-width="1.2" fill="none"/>
+          <circle cx="32" cy="32" r="3" stroke="#C8941A" stroke-width="1" fill="none"/>
+        </svg>
+        <div class="adinkra-name">Dwennimmen</div>
+        <div class="adinkra-meaning">"Ram's horns"</div>
+        <div class="adinkra-brand">Strength with humility. Power that does not announce itself.</div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ── THE THESIS ── -->
+  <div class="thesis d1">
+    <div class="thesis-eyebrow">The Central Thesis</div>
+    <p class="thesis-body">
+      The <strong>cowrie shell</strong> was African currency, adornment, and protection.<br>
+      The <strong>cameo</strong> is a jewel carved from shell.<br>
+      They are the same object — seen from two sides of history.<br><br>
+      <strong>The Cameo Row has always existed</strong> — in the markets of Manchester, the vèvè-marked doors of Port-au-Prince, the gold-weighted courts of Ashanti. This is simply its current address.
+    </p>
+  </div>
+
+  <!-- ── ICONOGRAPHY ── -->
+  <section>
+    <div class="section-header d1">
+      <span class="section-header-label">Iconography System</span>
+      <div class="section-header-line"></div>
+    </div>
+    <div class="icon-grid">
+
+      <div class="icon-card d2">
+        <div class="icon-theme">The Cameo / Cowrie</div>
+        <div class="icon-symbols">Oval cameo frame · Cowrie shell · Profile silhouette · Carved bas-relief · The shell as both jewel and currency</div>
+      </div>
+
+      <div class="icon-card d3">
+        <div class="icon-theme">The Row / Address</div>
+        <div class="icon-symbols">Archway · Colonnade · Lantern-lit street · A numbered door · Kingston townhouse facade · The market strip</div>
+      </div>
+
+      <div class="icon-card d4">
+        <div class="icon-theme">Akan / Ashanti</div>
+        <div class="icon-symbols">Sankofa bird · Adinkrahene circles · Kente stripe geometry · Cowrie currency · Gold weight forms</div>
+      </div>
+
+      <div class="icon-card d5">
+        <div class="icon-theme">Jamaica</div>
+        <div class="icon-symbols">Hummingbird · Blue Mountain silhouette · Ackee yellow · Pimento berry · The market vendor's table</div>
+      </div>
+
+      <div class="icon-card d6">
+        <div class="icon-theme">Haiti</div>
+        <div class="icon-symbols">Vèvè line work · Ironwork gate · Marassa twins (duality) · Sequined flag texture · Bicolour blue + red</div>
+      </div>
+
+      <div class="icon-card d7">
+        <div class="icon-theme">Mystery & Luxury</div>
+        <div class="icon-symbols">Wax seal · Single key · Unmarked door · Velvet curtain · Gold leaf · The invitation envelope</div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ── WORD CLUSTERS ── -->
+  <section>
+    <div class="section-header d1">
+      <span class="section-header-label">Word Associations</span>
+      <div class="section-header-line"></div>
+    </div>
+    <div class="cluster-grid">
+
+      <div class="cluster d2">
+        <div class="cluster-title">Cameo — The Jewel & The Shell</div>
+        <ul class="word-list">
+          <li>carved relief</li><li>silhouette</li>
+          <li>shell</li><li>ivory</li>
+          <li>onyx</li><li>brooch</li>
+          <li>heirloom</li><li>intaglio</li>
+          <li>bas-relief</li><li>cowrie</li>
+          <li>currency</li><li>adornment</li>
+        </ul>
+      </div>
+
+      <div class="cluster d3">
+        <div class="cluster-title">The Row — The Address</div>
+        <ul class="word-list">
+          <li>a destination</li><li>a district</li>
+          <li>Savile Row</li><li>market row</li>
+          <li>the strip</li><li>colonnade</li>
+          <li>curated collection</li><li>prestige</li>
+          <li>the numbered door</li><li>the gate</li>
+          <li>invited in</li><li>the society</li>
+        </ul>
+      </div>
+
+      <div class="cluster d4">
+        <div class="cluster-title">Heritage — Akan / Jamaica</div>
+        <ul class="word-list">
+          <li>sankofa</li><li>return</li>
+          <li>gold weight</li><li>kente</li>
+          <li>Manchester hills</li><li>hummingbird</li>
+          <li>market culture</li><li>diaspora</li>
+          <li>the ancestors</li><li>oral lore</li>
+          <li>ceremony</li><li>resilience</li>
+        </ul>
+      </div>
+
+      <div class="cluster d5">
+        <div class="cluster-title">The Brand Feeling</div>
+        <ul class="word-list">
+          <li>outside of time</li><li>invited</li>
+          <li>rare</li><li>quiet power</li>
+          <li>warmth beneath</li><li>knowing</li>
+          <li>never revealed fully</li><li>the impression</li>
+          <li>a brief brilliance</li><li>carved</li>
+          <li>rooted</li><li>chosen</li>
+        </ul>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ── TAGLINES ── -->
+  <section>
+    <div class="section-header d1">
+      <span class="section-header-label">Tagline Directions</span>
+      <div class="section-header-line"></div>
+    </div>
+    <div class="tagline-item d2"><span class="tagline-num">01</span><span class="tagline-text">Go back and get it.</span></div>
+    <div class="tagline-item d3"><span class="tagline-num">02</span><span class="tagline-text">Where every detail is a portrait.</span></div>
+    <div class="tagline-item d4"><span class="tagline-num">03</span><span class="tagline-text">Carved from what endures.</span></div>
+    <div class="tagline-item d5"><span class="tagline-num">04</span><span class="tagline-text">The address you don't forget.</span></div>
+    <div class="tagline-item d6"><span class="tagline-num">05</span><span class="tagline-text">Rare things. The right place.</span></div>
+    <div class="tagline-item d7"><span class="tagline-num">06</span><span class="tagline-text">The Row has always been here.</span></div>
+  </section>
+
+  <!-- ── LORE ── -->
+  <section>
+    <div class="section-header d1">
+      <span class="section-header-label">World-Building & Lore</span>
+      <div class="section-header-line"></div>
+    </div>
+    <div class="lore-grid">
+
+      <div class="lore-card d2">
+        <div class="lore-title">The Mythic Address</div>
+        <div class="lore-body">The Cameo Row has always existed — in the market rows of Manchester, the ironwork gates of Port-au-Prince, the gold-weighted courts of Kumasi. This is simply its current address.</div>
+      </div>
+
+      <div class="lore-card d3">
+        <div class="lore-title">Sankofa as Founding Principle</div>
+        <div class="lore-body">The brand looks backward to move forward. Every collection is an act of reclamation — beauty and craft that was always there, waiting to be named.</div>
+      </div>
+
+      <div class="lore-card d4">
+        <div class="lore-title">Guests, Not Shoppers</div>
+        <div class="lore-body">Customers are guests — received, not browsed. In the tradition of the market vendor who knows your name, who saves the good ones for you.</div>
+      </div>
+
+      <div class="lore-card d5">
+        <div class="lore-title">The Brand Voice</div>
+        <div class="lore-body">A letter from a grandmother with impeccable taste and deep memory. Knowing. Warm beneath the surface. Carrying stories it hasn't told yet.</div>
+      </div>
+
+    </div>
+  </section>
+
+</div>
+
+<footer>
+  <p class="footer-mark">The Cameo Row · Brand Identity Reference · Manchester, Jamaica · Ghana · Haiti</p>
+</footer>
+
+</body>
+</html>
